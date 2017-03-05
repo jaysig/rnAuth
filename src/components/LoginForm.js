@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import firebase from 'firebase';
 import { Button, Card, CardSection, Input } from './common';
 // import { connect } from 'react-redux';
 // import * as actions from '../../actions';
@@ -6,6 +7,11 @@ import { Button, Card, CardSection, Input } from './common';
 class LoginForm extends Component {
 
   state = { email: '', password: '' };
+
+  onButtonPress() {
+    const { email, password } = this.state;
+    firebase.auth().signInWithEmailAndPassword(email, password);
+  }
 
   render() {
     return (
@@ -29,7 +35,7 @@ class LoginForm extends Component {
         </CardSection>
 
         <CardSection >
-          <Button>
+          <Button onPress={this.onButtonPress.bind(this)}>
             Log In
           </Button>
         </CardSection>
